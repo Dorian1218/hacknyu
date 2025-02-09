@@ -5,12 +5,13 @@ import { useChat } from "@ai-sdk/react"
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useTransaction } from '@/context/TransactionsContext'
+import {ref, set, get, push} from "firebase/database"
 
 export default function page() {
   const { transactions } = useTransaction();
   console.log(transactions)
   const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: "/api/genai",
+    api: "/api/chat",
     body: { transactions }
   })
 

@@ -26,7 +26,7 @@ export default function page() {
     }
     return (
         <div className='w-screen h-screen flex'>
-            <div className='w-1/2 flex flex-col h-screen bg-blue-400 justify-center items-center'>
+            <div className='w-1/2 flex flex-col h-screen bg-sky-400 justify-center items-center'>
                 <p className='text-3xl mb-2'>Create Your Free Account</p>
                 <p>Manage your finances and expenses with advice specifically for you </p>
             </div>
@@ -53,7 +53,7 @@ export default function page() {
                     <Label>Confirm Password *</Label>
                     <Input value={data.confirmPassword} type='password' onChange={(e) => setData(prevData => ({ ...prevData, confirmPassword: e.target.value }))} />
                 </div>
-                <Button className='w-full bg-blue-500' onClick={() => handleSubmit()}>Continue</Button>
+                <Button className='w-full bg-sky-400' onClick={() => handleSubmit()}>Continue</Button>
             </div>
         </div>
     )

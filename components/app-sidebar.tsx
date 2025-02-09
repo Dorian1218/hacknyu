@@ -1,3 +1,5 @@
+"use client"
+
 import { Calendar, Home, Inbox, Search, Settings, LayoutDashboard, MessageCircle, ChartBar } from "lucide-react"
 
 import {
@@ -10,8 +12,14 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { Separator } from "./ui/separator"
+import { usePathname } from 'next/navigation'
+import { useAuth } from "@/context/AuthContext"
 
 export function AppSidebar() {
+  const pathname = usePathname()
+  const {user} = useAuth()
+  console.log(pathname)
   return (
     <Sidebar>
       <SidebarContent>
@@ -19,16 +27,6 @@ export function AppSidebar() {
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {/* {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))} */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <a href={"/dashboard"}>
@@ -55,6 +53,12 @@ export function AppSidebar() {
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
+        </SidebarGroup>
+        <Separator />
+        <SidebarGroup>
+          {/* {pathname === "/chat" && (
+
+          )}  */}
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>

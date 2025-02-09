@@ -6,7 +6,6 @@ const client = new PlaidApi(config);
 export async function POST(req: NextRequest) {
     const {access_token} = await req.json()
     try {
-        console.log("ACCESS TOKEN " + access_token)
         const response = await client.transactionsGet({
             access_token: access_token,
             start_date: "2024-01-01",
