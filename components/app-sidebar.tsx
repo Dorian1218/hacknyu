@@ -1,6 +1,7 @@
 "use client"
 
-import { Calendar, Home, Inbox, Search, Settings, LayoutDashboard, MessageCircle, ChartBar } from "lucide-react"
+import { LayoutDashboard, MessageCircle, ChartBar } from "lucide-react"
+import Profile from "../public/default.svg"
 
 import {
   Sidebar,
@@ -8,6 +9,7 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -15,13 +17,31 @@ import {
 import { Separator } from "./ui/separator"
 import { usePathname } from 'next/navigation'
 import { useAuth } from "@/context/AuthContext"
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
 
 export function AppSidebar() {
   const pathname = usePathname()
-  const {user} = useAuth()
+  const { user } = useAuth()
+  console.log(user)
   console.log(pathname)
   return (
     <Sidebar>
+      <SidebarHeader>
+        <div className="flex justify-start gap-1 items-center w-full">
+          <Avatar>
+            <AvatarImage src={user?.photoURL ? user.photoURL : "/default.svg"} />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+          <div>
+            <p>Test User</p>
+            <p className="text-sm">{user?.email}</p>
+          </div>
+        </div>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>

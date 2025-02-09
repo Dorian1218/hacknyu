@@ -34,8 +34,8 @@ export default function page() {
         ))}
       </div>
       <div className="flex flex-row gap-4 w-full">
-        <Input name="prompt" value={input} onChange={handleInputChange} />
-        <Button type="submit" onClick={handleSubmit}>Submit</Button>
+        <Input name="prompt" value={input} onChange={handleInputChange} placeholder='Talk about transactions or financial questions'/>
+        <Button type="submit" onClick={handleSubmit}>Ask Away</Button>
       </div>
     </div>
   )
