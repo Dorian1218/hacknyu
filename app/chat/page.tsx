@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { useTransaction } from '@/context/TransactionsContext'
 import { useAuth } from '@/context/AuthContext'
 import axios from 'axios'
+import ReactMarkdown from "react-markdown"
 
 export default function page() {
   const { user } = useAuth()
@@ -43,10 +44,10 @@ export default function page() {
         {messages.map((message, key) => (
           <div
             key={key}
-            className={`p-2 my-2 rounded-md ${message.role === 'user' ? 'bg-blue-500 self-end' : 'bg-gray-300 self-start'}`}
+            className={`p-2 my-2 rounded-md flex gap-2 ${message.role === 'user' ? 'bg-blue-500 self-end' : 'bg-gray-300 self-start'}`}
           >
             {message.role === 'user' ? `${dbUser.firstName}: ` : 'AI: '}
-            {message.content}
+            <ReactMarkdown>{message.content}</ReactMarkdown>
           </div>
         ))}
         {isLoading && <p>Loading...</p>}
