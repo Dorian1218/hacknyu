@@ -4,6 +4,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/app-sidebar"
 import "./globals.css";
 import AuthProvider from "@/context/AuthContext";
+import { TransactionProvider } from "@/context/TransactionsContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +32,9 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          {children}
+          <TransactionProvider>
+            {children}
+          </TransactionProvider>
         </body>
       </AuthProvider>
     </html>

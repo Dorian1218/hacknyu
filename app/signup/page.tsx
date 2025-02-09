@@ -5,8 +5,10 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import React, { useState } from 'react'
 import { useAuth } from "@/context/AuthContext"
+import { useRouter } from 'next/navigation'
 
 export default function page() {
+    const router = useRouter()
     const [data, setData] = useState({
         email: "",
         password: "",
@@ -14,7 +16,14 @@ export default function page() {
         lastName: "",
         confirmPassword: ""
     })
-    const { signup } = useAuth()
+    const { signup, signIn } = useAuth()
+    const handleSubmit = async () => {
+        await signup(data.email, data.password).then(async () => {
+            await signIn(data.email, data.password).then(() => {
+                router.push("/linkbankaccount") 
+            })
+        })
+    }
     return (
         <div className='w-screen h-screen flex'>
             <div className='w-1/2 flex flex-col h-screen bg-blue-400 justify-center items-center'>
@@ -44,7 +53,7 @@ export default function page() {
                     <Label>Confirm Password *</Label>
                     <Input value={data.confirmPassword} type='password' onChange={(e) => setData(prevData => ({ ...prevData, confirmPassword: e.target.value }))} />
                 </div>
-                <Button className='w-full bg-blue-500'>Continue</Button>
+                <Button className='w-full bg-blue-500' onClick={() => handleSubmit()}>Continue</Button>
             </div>
         </div>
     )

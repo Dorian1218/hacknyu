@@ -11,6 +11,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyCuK6bYwvFkO6MTo83B1zycYqj72KaA5Tc",
   authDomain: "hacknyu-53b32.firebaseapp.com",
   projectId: "hacknyu-53b32",
+  databaseURL: "https://hacknyu-53b32-default-rtdb.firebaseio.com/",
   storageBucket: "hacknyu-53b32.firebasestorage.app",
   messagingSenderId: "576908935727",
   appId: "1:576908935727:web:4255aca791ad1711697cda",

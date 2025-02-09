@@ -14,7 +14,7 @@ export default function Home() {
       <p className="text-lg mb-2">AI-Based Financial Assistant for Gen Z & Neurodivergent Individuals</p>
       <div className="flex gap-2">
         <Button className="bg-blue-600" onClick={() => router.push("/login")}>Login</Button>
-        <Button onClick={() => router.push("/login")}>Sign Up</Button>
+        <Button onClick={() => router.push("/signup")}>Sign Up</Button>
       </div>
     </div>
   );
