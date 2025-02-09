@@ -1,17 +1,25 @@
 "use client"
 
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { useTransaction } from '@/context/TransactionsContext';
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
 export default function page() {
+  const router = useRouter()
   const { transactions } = useTransaction();
   console.log(transactions)
 
   return (
-    <div className='flex flex-col min-h-screen p-5 gap-3 w-full max-w-full'>
-      <p className='text-3xl'>Dashbaord</p>
-      <p className='text-2xl'>Transactions</p>
+    <div className='flex flex-col min-h-screen p-5 gap-3'>
+      <div className='flex justify-between'>
+        <div>
+          <p className='text-3xl'>Dashbaord</p>
+          <p className='text-2xl'>Transactions</p>
+        </div>
+        <Button onClick={() => router.push("/chat")}>Chat with AI for insight on your finances</Button>
+      </div>
       <div className="space-y-4">
         {transactions.length === 0 ? (
           <p>No transactions found.</p>
