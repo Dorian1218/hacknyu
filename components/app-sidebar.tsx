@@ -23,11 +23,26 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar"
 import axios from "axios"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 export function AppSidebar() {
   const pathname = usePathname()
   const { user } = useAuth()
+  const [dbUser, setDbUser] = useState({
+    firstName: "",
+    lastName: "",
+  })
+  useEffect(() => {
+    const getName = async () => {
+      if (user) {
+        await axios.post("/api/firebase/get-name", {id: user.uid}).then((res)=> {
+          const key = Object.keys(res.data)[0]
+          setDbUser({firstName: res.data[key].firstName, lastName: res.data[key].lastName})
+        })
+      }
+    }
+    getName()
+  }, [user])
   return (
     <Sidebar>
       <SidebarHeader>
@@ -37,7 +52,7 @@ export function AppSidebar() {
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <div>
-            <p>Test User</p>
+            <p>{dbUser.firstName} {dbUser.lastName}</p>
             <p className="text-sm">{user?.email}</p>
           </div>
         </div>

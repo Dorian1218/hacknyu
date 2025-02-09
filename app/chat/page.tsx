@@ -1,18 +1,36 @@
 "use client"
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useChat } from "@ai-sdk/react"
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useTransaction } from '@/context/TransactionsContext'
-import {ref, set, get, push} from "firebase/database"
+import { useAuth } from '@/context/AuthContext'
+import axios from 'axios'
 
 export default function page() {
+  const { user } = useAuth()
   const { transactions } = useTransaction();
+  const [dbUser, setDbUser] = useState({
+    firstName: "",
+    lastName: "",
+  })
   const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
     api: "/api/chat",
-    body: { transactions }
-  })
+    body: { transactions },
+  });
+  
+  useEffect(() => {
+    const getName = async () => {
+      if (user) {
+        await axios.post("/api/firebase/get-name", { id: user.uid }).then((res) => {
+          const key = Object.keys(res.data)[0]
+          setDbUser({ firstName: res.data[key].firstName, lastName: res.data[key].lastName })
+        })
+      }
+    }
+    getName()
+  }, [user])
 
   return (
     <div className='h-screen flex flex-col justify-between p-5 items-center w-full'>
@@ -22,22 +40,22 @@ export default function page() {
                 display: none;
             }
         `}</style>
-        {messages.map(message => (
+        {messages.map((message, key) => (
           <div
-            key={message.id}
+            key={key}
             className={`p-2 my-2 rounded-md ${message.role === 'user' ? 'bg-blue-500 self-end' : 'bg-gray-300 self-start'}`}
           >
-            {message.role === 'user' ? 'User: ' : 'AI: '}
+            {message.role === 'user' ? `${dbUser.firstName}: ` : 'AI: '}
             {message.content}
           </div>
         ))}
         {isLoading && <p>Loading...</p>}
       </div>}
       {messages.length === 0 && <div className='w-full h-full flex justify-center items-center'>
-          <p className='text-3xl'>Financial AI Bot</p>
-        </div>}
+        <p className='text-3xl'>Financial AI Bot</p>
+      </div>}
       <div className="flex flex-row gap-4 w-full">
-        <Input name="prompt" value={input} onChange={handleInputChange} placeholder='Talk about transactions or financial questions'/>
+        <Input name="prompt" value={input} onChange={handleInputChange} placeholder='Talk about transactions or financial questions' />
         <Button type="submit" onClick={handleSubmit}>Ask Away</Button>
       </div>
     </div>

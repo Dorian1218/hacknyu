@@ -43,7 +43,7 @@ export default function page() {
       </div>
       <div className='w-1/3 h-screen flex flex-col justify-center items-center p-5 gap-2'>
         <p className='text-3xl'>Advice</p>
-        <Button onClick={() => router.push("/analysis")}>Generate AI Overview</Button>
+        <Button onClick={() => router.push("/analysis")} className='w-full bg-sky-400'>Generate AI Overview</Button>
         <p>Optimize your spending in seconds</p>
         <p>or</p>
         <Button onClick={() => router.push("/chat")} className='w-full'>Chat with AI</Button>
