@@ -35,6 +35,7 @@ export default function page() {
 
   return (
     <div className='h-screen flex flex-col justify-between p-5 items-center w-full'>
+      <p className="text-2xl absolute top-5">WealthWise</p>
       {messages.length > 0 && <div className='flex flex-col w-full overflow-y-auto mb-4' style={{ maxHeight: 'calc(100vh - 100px)', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
         <style jsx>{`
             div::-webkit-scrollbar {
@@ -44,9 +45,9 @@ export default function page() {
         {messages.map((message, key) => (
           <div
             key={key}
-            className={`p-2 my-2 rounded-md flex gap-2 ${message.role === 'user' ? 'bg-blue-500 self-end' : 'bg-gray-300 self-start'}`}
+            className={`p-2 my-2 rounded-md ${message.role === 'user' ? 'bg-blue-500 self-end' : 'bg-gray-300 self-start'}`}
           >
-            {message.role === 'user' ? `${dbUser.firstName}: ` : 'AI: '}
+            <p className="font-bold">{message.role === 'user' ? `${dbUser.firstName}: ` : 'WealthWise: '}</p>
             <ReactMarkdown>{message.content}</ReactMarkdown>
           </div>
         ))}
