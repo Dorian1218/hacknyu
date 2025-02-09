@@ -6,6 +6,8 @@ import { Label } from '@/components/ui/label'
 import React, { useState } from 'react'
 import { useAuth } from "@/context/AuthContext"
 import { useRouter } from 'next/navigation'
+import { ref, set, get, push } from "firebase/database"
+import { database } from '@/firebase'
 
 export default function page() {
     const router = useRouter()
@@ -16,11 +18,19 @@ export default function page() {
         lastName: "",
         confirmPassword: ""
     })
-    const { signup, signIn } = useAuth()
+    const { signup, signIn, user } = useAuth()
     const handleSubmit = async () => {
         await signup(data.email, data.password).then(async () => {
             await signIn(data.email, data.password).then(() => {
-                router.push("/linkbankaccount") 
+                const userRef = ref(database, `users/${user?.uid}`)
+                const newDataRef = push(userRef)
+                set(newDataRef, {
+                    email: data.email,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    id: user.uid
+                })
+                router.push("/linkbankaccount")
             })
         })
     }

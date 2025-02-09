@@ -9,7 +9,6 @@ import React from 'react'
 export default function page() {
   const router = useRouter()
   const { transactions } = useTransaction();
-  console.log(transactions)
 
   return (
     <div className='flex flex-row p-5'>

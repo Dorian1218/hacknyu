@@ -7,13 +7,13 @@ import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { useTransaction } from '@/context/TransactionsContext';
+import {ref, set, get, push} from "firebase/database"
 
 export default function Home() {
   const router = useRouter()
   const [linkToken, setLinkToken] = useState<string | null>(null);
   const { user } = useAuth()
   const { setTransactions } = useTransaction();
-  console.log(user)
   useEffect(() => {
     const createLinkToken = async () => {
       try {

@@ -21,7 +21,6 @@ export async function POST(req: Request) {
             ],
             system: "Your job is to analyze the financial summary provided by the user and provide helpful, actionable tips for improving their financial habits."
         });
-        console.log(streamingResponse.toDataStreamResponse())
         return streamingResponse.toDataStreamResponse()
     } catch (error) {
         console.error('Error processing request:', error);

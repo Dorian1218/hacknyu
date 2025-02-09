@@ -22,12 +22,12 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar"
+import axios from "axios"
+import { useEffect } from "react"
 
 export function AppSidebar() {
   const pathname = usePathname()
   const { user } = useAuth()
-  console.log(user)
-  console.log(pathname)
   return (
     <Sidebar>
       <SidebarHeader>
