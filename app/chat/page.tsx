@@ -18,9 +18,9 @@ export default function page() {
   })
   const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
     api: "/api/chat",
-    body: { transactions },
+    body: { transactions: transactions },
   });
-  
+
   useEffect(() => {
     const getName = async () => {
       if (user) {
@@ -35,7 +35,6 @@ export default function page() {
 
   return (
     <div className='h-screen flex flex-col justify-between p-5 items-center w-full'>
-      <p className="text-2xl absolute top-5">WealthWise</p>
       {messages.length > 0 && <div className='flex flex-col w-full overflow-y-auto mb-4' style={{ maxHeight: 'calc(100vh - 100px)', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
         <style jsx>{`
             div::-webkit-scrollbar {

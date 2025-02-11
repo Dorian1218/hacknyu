@@ -1,8 +1,7 @@
 "use server"
 
 import { google } from '@ai-sdk/google';
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { Message, streamText } from 'ai';
+import { streamText } from 'ai';
 
 export async function POST(req: Request) {
     try {
